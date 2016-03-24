@@ -10,7 +10,7 @@ BINARY = $(CFILES:.cpp=.bin)
 build: $(BINARY)
 
 $(BINARY):$(CFILES)
-	$(CXX) $(CFILES) $(CXXFLAGS) -o $(BINARY)
+	$(CXX) $< $(CXXFLAGS) -o $@
 
 clean:
 	rm $(BINARY) 2> /dev/null
