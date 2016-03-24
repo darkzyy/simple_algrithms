@@ -9,7 +9,7 @@ BINARY = $(CFILES:.cpp=.bin)
 
 build: $(BINARY)
 
-$(BINARY):$(CFILES)
+%.bin: %.cpp
 	$(CXX) $< $(CXXFLAGS) -o $@
 
 clean:
