@@ -4,6 +4,7 @@
 *.o
 *.obj
 tags
+*.bin
 
 # Precompiled Headers
 *.gch
