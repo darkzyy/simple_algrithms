@@ -108,15 +108,15 @@ bool pass(string str) {
 
 int main(){
     int n_entries, n_tests, i;
-    char buffer[100];
     cin >> n_entries;
     cin >> n_tests;
     //cin >> buffer;
-    vector<string> v;
+    vector<char*> v;
     for(i = 0; i <= n_entries; i++) {
-        cin.getline(buffer, 100);
+        char* buffer = new char[26];
+        cin.getline(buffer, 26);
         if(strlen(buffer) >0) {
-            v.push_back((string) buffer);
+            v.push_back(buffer);
         }
     }
 
@@ -124,6 +124,7 @@ int main(){
         add_entry(v[n_entries - i - 1]);
     }
 
+    char buffer[32];
     for(i = 0; i < n_tests; i++) {
         cin.getline(buffer, 100);
         if(pass((string) buffer)){
