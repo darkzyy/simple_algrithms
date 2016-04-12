@@ -165,9 +165,26 @@ int main() {
         
         int n_tests;
         cin >> n_tests;
+        bool fail = false;
         while(n_tests) {
-
+            cin >> x >> y >> z;
+            if (!fail) {
+                if(!is_attachable(z, y, x)) {
+                    fail = true;
+                    n_tests -= 1;
+                    continue;
+                }
+                if(!is_accessible(z, y, x)) {
+                    fail = true;
+                }
+            }
             n_tests -= 1;
+        }
+        if(fail) {
+            cout << "No" << endl;
+        }
+        else {
+            cout << "Yes" << endl;
         }
         n_samples -= 1;
     }
