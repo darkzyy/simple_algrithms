@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <cstdio>
 #include <vector>
-#include "debug.h"
+
 
 
 using namespace std;
@@ -38,24 +38,28 @@ void add_node(node* n, uint32_t ip, uint32_t mask, uint32_t rule) {
         n->right = nullptr;
     }
     else {
-        if(n->rule != rule) {
-            n->rule = unknown;
+        if(n->left == nullptr) {
+            n->left = new node;
+            n->left->left = nullptr;
+            n->left->right = nullptr;
+            n->left->rule = n->rule;
+        }
+        if(n->right == nullptr) {
+            n->right = new node;
+            n->right->left = nullptr;
+            n->right->right = nullptr;
+            n->right->rule = n->rule;
         }
         if(0x80000000 & ip) {
-            if(n->left == nullptr) {
-                n->left = new node;
-                n->left->left = nullptr;
-                n->left->right = nullptr;
-                n->left->rule = unknown;
+            if(n->rule != rule && n->rule != unknown) {
+                n->rule = unknown;
             }
             add_node(n->left, ip << 1, mask - 1, rule);
         }
         else {
-            if(n->right == nullptr) {
-                n->right = new node;
-                n->right->left = nullptr;
-                n->right->right = nullptr;
-                n->right->rule = unknown;
+            if(n->rule != rule && n->rule != unknown) {
+                n->left->rule = n->rule;
+                n->rule = unknown;
             }
             add_node(n->right, ip << 1, mask - 1, rule);
         }
@@ -100,7 +104,7 @@ bool find_node(node *n, uint32_t ip) {
     else {
         if(0x80000000 & ip) {
             if(n->left == nullptr) {
-                return false;
+                return true;
             }
             else {
                 return find_node(n->left, ip << 1);
@@ -108,7 +112,7 @@ bool find_node(node *n, uint32_t ip) {
         }
         else {
             if(n->right == nullptr) {
-                return false;
+                return true;
             }
             else {
                 return find_node(n->right, ip << 1);
@@ -125,7 +129,7 @@ bool pass(string str) {
 int main(){
     root.left = nullptr;
     root.right = nullptr;
-    root.rule = unknown;
+    root.rule = allow;
     int n_entries, n_tests, i;
     cin >> n_entries;
     cin >> n_tests;
@@ -155,3 +159,4 @@ int main(){
     }
     return 0;
 }
+
