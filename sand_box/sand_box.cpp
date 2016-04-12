@@ -30,12 +30,13 @@ vector<int *> *expand(vector<int *> *input) {
     unsigned int i;
     unsigned int in_size = input->size();
     for (i = 0; i < in_size; i++) {
+        int z, y, x;
         z = (*input)[i][0];
         y = (*input)[i][1];
         x = (*input)[i][2];
         if(dyeable[z][y][x + 1]) {
             if (x + 1 == 100) {
-                (*shell)[0] = NULL;
+                (*shell)[0] = nullptr;
                 freex(input);
                 return shell;
             }
@@ -47,7 +48,7 @@ vector<int *> *expand(vector<int *> *input) {
         }
         if(dyeable[z][y][x - 1]) {
             if (x - 1 == 1) {
-                (*shell)[0] = NULL;
+                (*shell)[0] = nullptr;
                 freex(input);
                 return shell;
             }
@@ -59,7 +60,7 @@ vector<int *> *expand(vector<int *> *input) {
         }
         if(dyeable[z][y + 1][x]) {
             if (y + 1 == 100) {
-                (*shell)[0] = NULL;
+                (*shell)[0] = nullptr;
                 freex(input);
                 return shell;
             }
@@ -71,7 +72,7 @@ vector<int *> *expand(vector<int *> *input) {
         }
         if(dyeable[z][y - 1][x]) {
             if (y - 1 == 1) {
-                (*shell)[0] = NULL;
+                (*shell)[0] = nullptr;
                 freex(input);
                 return shell;
             }
@@ -83,7 +84,7 @@ vector<int *> *expand(vector<int *> *input) {
         }
         if(dyeable[z + 1][y][x]) {
             if (z + 1 == 100) {
-                (*shell)[0] = NULL;
+                (*shell)[0] = nullptr;
                 freex(input);
                 return shell;
             }
@@ -114,7 +115,7 @@ bool is_accessible(int z, int y, int x) {
     shell->push_back(v);
     while(true) {
         shell = expand(shell);
-        if((*shell) == NULL) {
+        if((*shell)[0] == nullptr) {
             freex(shell);
             int z,y,x;
             for (z = 1; z < 102; z++) {
