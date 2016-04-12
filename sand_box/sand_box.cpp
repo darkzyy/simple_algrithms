@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <vector>
+#include "debug.h"
 
 using namespace std;
 
@@ -37,7 +38,9 @@ vector<int *> *expand(vector<int *> *input) {
         x = (*input)[i][2];
         if(dyeable[z][y][x + 1]) {
             if (x + 1 == 100) {
-                (*shell)[0] = nullptr;
+                if(shell->size()) {
+                    (*shell)[0] = nullptr;
+                }
                 freex(input);
                 return shell;
             }
@@ -49,7 +52,9 @@ vector<int *> *expand(vector<int *> *input) {
         }
         if(dyeable[z][y][x - 1]) {
             if (x - 1 == 1) {
-                (*shell)[0] = nullptr;
+                if(shell->size()) {
+                    (*shell)[0] = nullptr;
+                }
                 freex(input);
                 return shell;
             }
@@ -61,7 +66,9 @@ vector<int *> *expand(vector<int *> *input) {
         }
         if(dyeable[z][y + 1][x]) {
             if (y + 1 == 100) {
-                (*shell)[0] = nullptr;
+                if(shell->size()) {
+                    (*shell)[0] = nullptr;
+                }
                 freex(input);
                 return shell;
             }
@@ -73,7 +80,9 @@ vector<int *> *expand(vector<int *> *input) {
         }
         if(dyeable[z][y - 1][x]) {
             if (y - 1 == 1) {
-                (*shell)[0] = nullptr;
+                if(shell->size()) {
+                    (*shell)[0] = nullptr;
+                }
                 freex(input);
                 return shell;
             }
@@ -85,7 +94,9 @@ vector<int *> *expand(vector<int *> *input) {
         }
         if(dyeable[z + 1][y][x]) {
             if (z + 1 == 100) {
-                (*shell)[0] = nullptr;
+                if(shell->size()) {
+                    (*shell)[0] = nullptr;
+                }
                 freex(input);
                 return shell;
             }
