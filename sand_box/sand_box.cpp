@@ -23,6 +23,7 @@ void freex(vector<int *> *input) {
     for (i = 0; i < in_size; i++) {
         delete [] (*input)[i];
     }
+    delete input;
 }
 
 vector<int *> *expand(vector<int *> *input) {
@@ -174,8 +175,12 @@ int main() {
                     n_tests -= 1;
                     continue;
                 }
-                if(!is_accessible(z, y, x)) {
+                else if(!is_accessible(z, y, x)) {
                     fail = true;
+                }
+                else {
+                    attachable[z][y][x] = 1;
+                    dyeable[z][y][x] = 0;
                 }
             }
             n_tests -= 1;
