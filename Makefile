@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -O2 -Wall -std=gnu++11 -Werror -I./inc
+CXXFLAGS = -O2 -Wall -std=gnu++11 -Werror -I./inc -g
 
 CFILES = $(shell find -name "*.cpp")
 BINARY = $(CFILES:.cpp=.bin)

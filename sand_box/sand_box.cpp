@@ -38,9 +38,7 @@ vector<int *> *expand(vector<int *> *input) {
         x = (*input)[i][2];
         if(dyeable[z][y][x + 1]) {
             if (x + 1 == 100) {
-                if(shell->size()) {
-                    (*shell)[0] = nullptr;
-                }
+                shell->push_back(nullptr);
                 freex(input);
                 return shell;
             }
@@ -52,9 +50,7 @@ vector<int *> *expand(vector<int *> *input) {
         }
         if(dyeable[z][y][x - 1]) {
             if (x - 1 == 1) {
-                if(shell->size()) {
-                    (*shell)[0] = nullptr;
-                }
+                shell->push_back(nullptr);
                 freex(input);
                 return shell;
             }
@@ -66,9 +62,7 @@ vector<int *> *expand(vector<int *> *input) {
         }
         if(dyeable[z][y + 1][x]) {
             if (y + 1 == 100) {
-                if(shell->size()) {
-                    (*shell)[0] = nullptr;
-                }
+                shell->push_back(nullptr);
                 freex(input);
                 return shell;
             }
@@ -80,9 +74,7 @@ vector<int *> *expand(vector<int *> *input) {
         }
         if(dyeable[z][y - 1][x]) {
             if (y - 1 == 1) {
-                if(shell->size()) {
-                    (*shell)[0] = nullptr;
-                }
+                shell->push_back(nullptr);
                 freex(input);
                 return shell;
             }
@@ -94,9 +86,7 @@ vector<int *> *expand(vector<int *> *input) {
         }
         if(dyeable[z + 1][y][x]) {
             if (z + 1 == 100) {
-                if(shell->size()) {
-                    (*shell)[0] = nullptr;
-                }
+                shell->push_back(nullptr);
                 freex(input);
                 return shell;
             }
@@ -127,19 +117,6 @@ bool is_accessible(int z, int y, int x) {
     shell->push_back(v);
     while(true) {
         shell = expand(shell);
-        if((*shell)[0] == nullptr) {
-            freex(shell);
-            int z,y,x;
-            for (z = 1; z < 102; z++) {
-                for (y = 0; y < 102; y++) {
-                    for (x = 0; x < 102; x++) {
-                        if(attachable[z][y][x] == 0)
-                            dyeable[z][y][x] = 1;
-                    }
-                }
-            }
-            return true;
-        }
         if(shell->size() == 0) {
             int z,y,x;
             for (z = 1; z < 102; z++) {
@@ -151,6 +128,19 @@ bool is_accessible(int z, int y, int x) {
                 }
             }
             return false;
+        }
+        if(*(shell->rbegin()) == nullptr) {
+            freex(shell);
+            int z,y,x;
+            for (z = 1; z < 102; z++) {
+                for (y = 0; y < 102; y++) {
+                    for (x = 0; x < 102; x++) {
+                        if(attachable[z][y][x] == 0)
+                            dyeable[z][y][x] = 1;
+                    }
+                }
+            }
+            return true;
         }
     }
 }
