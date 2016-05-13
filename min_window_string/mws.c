@@ -43,7 +43,7 @@ char* minWindow(char* s, char* t) {
                         if(cur_min_len < min_len) {
                             min_len = cur_min_len;
                             min_l = lptr - s;
-                            min_r = rptr - s;
+                            min_r = rptr - s + 1;
                         }
                     }
                 }
@@ -60,11 +60,18 @@ char* minWindow(char* s, char* t) {
                     log();
                     state = -1;
                     s_unique -= 1;
-                    int cur_min_len = rptr - lptr;
+                    int cur_min_len = (rptr -1) - lptr;
+                    log("removed %c", *lptr);
                     if(cur_min_len < min_len) {
+                        log("replaced");
                         min_len = cur_min_len;
                         min_l = lptr - s;
                         min_r = rptr - s;
+                    }
+                    else {
+                        log_var(lptr-s);
+                        log_var(rptr-s);
+                        log("%c", *lptr);
                     }
                 }
                 s_counter[idx(*lptr)] -= 1;
@@ -74,21 +81,28 @@ char* minWindow(char* s, char* t) {
     }
     log();
     if(min_len == 0x7fffffff) {
-        s[0] = '\0';
-        return s + min_l;
+        char *ret = malloc(sizeof(char)*1);
+        ret[0] = '\0';
+        return ret;
     }
     else {
+        char *ret = malloc(sizeof(char)*(min_r - min_l));
+        strncpy(ret, s + min_l, (min_r - min_l));
+        return ret;
         if(s[min_r] != '\0') {
             s[min_r] = '\0';
         }
-        log();
         return s + min_l;
     }
 }
 
 int main() {
-    char* s = "ADOBECODEBANC";
-    char* t = "ABC";
+    //char* s = "AAB";
+    //char* s = "CCcAABB";
+    //char* s = "CAAAAAAAABAAAB";
+    //char* s = "ADOBECODEBANC";
+    char* s = "BANCfasdfasdfASGR";
+    char* t = "CCBA";
     printf("-- %s -- \n", minWindow(s, t));
     return 0;
 }
