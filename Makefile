@@ -1,7 +1,7 @@
 CXX = g++
 CC = gcc
 CXXFLAGS = -O2 -Wall -std=gnu++11 -Werror -I./inc
-CFLAGS = -O2 -Wall -std=gnu11 -Werror -I./inc
+CFLAGS = -O2 -Wall -std=gnu11 -Werror -I./inc -m32
 
 CXXFILES = $(shell find -name "*.cpp")
 CFILES = $(shell find -name "*.c")
