@@ -4,19 +4,19 @@
 #include "cdebug.h"
 
 static inline int idx(char x) {
-    return (int)(x - 'A');
+    return (int)(x - '\0');
 }
 
 char* minWindow(char* s, char* t) {
-    int char_counter[26];
-    memset((void *) char_counter, 0, 26 * sizeof(int));
+    int char_counter[128];
+    memset((void *) char_counter, 0, 128 * sizeof(int));
     while (*t) {
-        char_counter[idx(*t++)] = 1;
+        char_counter[idx(*t++)] += 1;
     }
     int i;
     int t_unique = 0;
-    int s_counter[26];
-    for (i = 0; i < 26; i++) {
+    int s_counter[128];
+    for (i = 0; i < 128; i++) {
         t_unique += char_counter[i];
         s_counter[i] = 0;
     }
