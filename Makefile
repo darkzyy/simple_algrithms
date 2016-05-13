@@ -1,16 +1,22 @@
 CXX = g++
-CXXFLAGS = -O2 -Wall -std=gnu++11 -Werror -I./inc -g
+CC = gcc
+CXXFLAGS = -O2 -Wall -std=gnu++11 -Werror -I./inc
+CFLAGS = -O2 -Wall -std=gnu++11 -Werror -I./inc
 
-CFILES = $(shell find -name "*.cpp")
-BINARY = $(CFILES:.cpp=.bin)
+CXXFILES = $(shell find -name "*.cpp")
+CFILES = $(shell find -name "*.c")
+BINARY = $(CXXFILES:.cpp=.cppbin) $(CFILES:.cpp=.cbin) 
 
 
 .PHONY: build clean
 
 build: $(BINARY)
 
-%.bin: %.cpp
+%.cppbin: %.cpp
 	$(CXX) $< $(CXXFLAGS) -o $@
+
+%.cbin: %.c
+	$(CC) $< $(CFLAGS) -o $@
 
 clean:
 	rm $(BINARY) 2> /dev/null
