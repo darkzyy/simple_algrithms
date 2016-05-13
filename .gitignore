@@ -5,6 +5,8 @@
 *.obj
 tags
 *.bin
+*.cppbin
+*.cbin
 *.txt
 
 # Precompiled Headers
