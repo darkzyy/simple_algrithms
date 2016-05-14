@@ -92,8 +92,9 @@ char* minWindow(char* s, char* t) {
     else {
         log_var(min_l);
         log_var(min_r);
-        char *ret = malloc(sizeof(char)*(min_r - min_l));
+        char *ret = malloc(sizeof(char)*(min_r - min_l + 1));
         strncpy(ret, s + min_l, (min_r - min_l));
+        ret[min_r - min_l] = '\0';
         log();
         return ret;
     }
@@ -102,10 +103,12 @@ char* minWindow(char* s, char* t) {
 int main() {
     //char* s = "AAB";
     //char* s = "CCcAABB";
-    char* s = "CAAAAAAAABCAAAB";
+    //char* s = "CAAAAAAAABCAAAB";
     //char* s = "ADOBECODEBNC";
     //char* s = "fasdfasdfASGRBANC";
-    char* t = "CBAA";
+    //char* t = "CBAA";
+    char *s = "adobecodebanc";
+    char *t = "abcda";
     printf("-- %s -- \n", minWindow(s, t));
     return 0;
 }
